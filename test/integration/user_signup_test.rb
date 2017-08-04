@@ -5,6 +5,10 @@ class UserSignupTest < ActionDispatch::IntegrationTest
   #   assert true
   # end
 
+  def setup
+    @user = users(:michael)
+  end
+
   test "invalid signup information" do
   	get signup_path
   	assert_no_difference 'User.count' do
@@ -26,6 +30,7 @@ class UserSignupTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
     assert_template 'users/show'
+    assert is_logged_in?
   end  
 
 end
